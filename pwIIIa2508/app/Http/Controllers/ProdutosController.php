@@ -41,8 +41,9 @@ class ProdutosController extends Controller
     {
         $validator= Validator::make($request->all(),[
             'nome'=> 'required',
-            'marca'=> 'required',
+            'loja'=> 'required',
             'preco'=> 'required',
+            'quantidade'=> 'required',
          ]);
 
          if ($validator->fails()) {
@@ -88,7 +89,12 @@ class ProdutosController extends Controller
             ], 404);
         }
     }
-
+public function updateParcial(Request $request, $id)
+{
+    $produto = Produtos::findOrFail($id);
+    $produto->update($request->all()); // só atualiza os campos enviados
+    return response()->json($produto, 200);
+}
     /**
      * Update the specified resource in storage.
      */
@@ -96,22 +102,23 @@ class ProdutosController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nome'=> 'required',
-            'marca'=> 'required',
+            'loja'=> 'required',
             'preco'=> 'required',
+            'quantidade'=> 'required',
         ]);
 
         if ($validator->fails()){
             return response()->json([
                 'sucess'=> false,
                 'message'=> 'registros inválidos',
-                'erros'=> $validator->erros()
+                'erros'=> $validator->errors()
             ], 400);
         }
     
     
     $registrosBanco = Produtos::find($id);
 
-    if (!registrosBanco) {
+    if (!$registrosBanco) {
         return response()->json ([
             'sucess'=> false,
             'message'=> 'Produto não encontrado'
@@ -120,8 +127,9 @@ class ProdutosController extends Controller
     
 
     $registrosBanco->nome = $request->nome;
-    $registrosBanco->marca = $request->marca;
+    $registrosBanco->loja = $request->loja;
     $registrosBanco->preco = $request->preco;
+     $registrosBanco->quantidade = $request->quantidade;
 
     if ($registrosBanco->save()) {
         return response()->json([
