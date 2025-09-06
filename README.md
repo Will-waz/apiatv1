@@ -1,6 +1,18 @@
-#api sobre anabolizantes pra atividade de pwIII
+Api sobre anabolizantes pra atividade de pwIII
+
+Print das funções
+
+função post
 ![função post](prints/post.png)
-![função get](get/screenshot.png)
-![função put](put/screenshot.png)
-![função patch](patch/screenshot.png)
-![função delete](delete/screenshot.png)
+
+função get
+![função get](prints/get.png)
+
+função put
+![função put](prints/put.png)
+
+função patch
+![função patch](prints/patch.png)
+
+função delete
+![função delete](prints/delete.png)
