@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produtos;
+use App\Models\Anabolizantes;
 use Illuminate\Http\Request;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
-class ProdutosController extends Controller
+class AnabolizantesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $registros = Produtos::all();
+        $registros = Anabolizantes::all();
 
         $contador = $registros->count();
 
         if ($contador >0){
             return response ()->json([
                 'sucess'=> true,
-                'message'=> 'produtos encontrados com sucesso!',
+                'message'=> 'Anabolizantes encontrados com sucesso!',
                 'data'=> $registros,
                 'total'=> $contador], 200);
             } else{
@@ -54,12 +54,12 @@ class ProdutosController extends Controller
             ], 400);
          }
 
-         $registros = Produtos::create($request->all());
+         $registros = Anabolizantes::create($request->all());
 
          if ($registros) {
             return response()->json([
                 'sucess'=> true,
-                'message'=> 'produtos cadastrados com sucesso!',
+                'message'=> 'Anabolizantes cadastrados com sucesso!',
                 'data'=> $registros
             ], 500);
 
@@ -72,7 +72,7 @@ class ProdutosController extends Controller
      */
     public function show($id)
     {
-        $registros = Produtos::find($id);
+        $registros = Anabolizantes::find($id);
 
         if ($registros) {
             return response()->json([
@@ -91,7 +91,7 @@ class ProdutosController extends Controller
     }
 public function updateParcial(Request $request, $id)
 {
-    $produto = Produtos::findOrFail($id);
+    $produto = Anabolizantes::findOrFail($id);
     $produto->update($request->all()); // só atualiza os campos enviados
     return response()->json($produto, 200);
 }
@@ -116,7 +116,7 @@ public function updateParcial(Request $request, $id)
         }
     
     
-    $registrosBanco = Produtos::find($id);
+    $registrosBanco = Anabolizantes::find($id);
 
     if (!$registrosBanco) {
         return response()->json ([
@@ -153,7 +153,7 @@ public function updateParcial(Request $request, $id)
      */
     public function destroy($id)
 {
-        $registros = Produtos::find($id);
+        $registros = Anabolizantes::find($id);
 
         if (!$registros) {
             return response()->json([
